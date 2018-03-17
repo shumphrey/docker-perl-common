@@ -1,9 +1,12 @@
 sudo: required
 
-language: ruby
-
 services:
   - docker
 
-script:
-  - bash ./build.sh
+env: 
+  - PERL=5.24 DOCKERFILE=./Dockerfile    SUFFIX=''
+  - PERL=5.24 DOCKERFILE=./pg/Dockerfile SUFFIX='-pg'
+  - PERL=5.26 DOCKERFILE=./Dockerfile    SUFFIX=''    LATEST="latest"
+  - PERL=5.26 DOCKERFILE=./pg/Dockerfile SUFFIX='-pg' LATEST="pg"
+
+script: bash build_and_deploy.sh
